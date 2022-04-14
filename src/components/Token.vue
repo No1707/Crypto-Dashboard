@@ -1,6 +1,6 @@
 <template>
     <tr class="text-center border-b border-slate-200 hover:bg-zinc-200 hover:cursor-pointer">
-        <router-link class="w-full" :to="{ name: 'token', params: { id: token.id }, props: token }">
+        <router-link class="w-full" :to="{ name: 'token', params: { id: token.id } }">
             <td class="font-bold flex justify-start items-center"><img class="w-8 m-3" :src="token.image" :alt="token.id">{{ token.name }}</td>
             <td class="font-bold">${{ token.current_price }}</td>
             <td :class="[ positiveChange ? posChange : negChange ]">${{ token.price_change_24h }}, <span >{{ token.price_change_percentage_24h }}%</span></td>
@@ -64,8 +64,7 @@
         },
         methods: {
             colorText() {
-                const firstDigit = String(this.priceChange)[0]
-                if(firstDigit === "-") this.positiveChange = false
+                if(this.priceChange < 0) this.positiveChange = false
             }
         }
     }
