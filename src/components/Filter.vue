@@ -1,54 +1,64 @@
 <template>
-    <div class="py-4">
+    <div class="p-4 flex items-center w-full sticky top-1px bg-white transition rounded-lg">
 
-        <!-- Market cap. order filter-->
-        <div class="inline-block w-50">
-            <div class="relative " @click="toggleOrder()">
-                <div class="text-center label cursor-pointer rounded-lg bg-slate-100 px-4 py-2 shadow-lg">
-                        <span>{{ orderValue }} ⌄</span>
-                </div>
-                <div class="w-full absolute bg-slate-300 rounded-b-lg" :class="{ hidden : !visibleOrderFilter, visibleOrderFilter }">
-                    <ul>
-                        <li
-                            class="px-4 py-2 text-center cursor-pointer hover:bg-slate-400"
-                            v-for="order in rowsOrder"
-                            :class="{ current : order === orderValue }"
-                            @click="selectOrder(order); $emit('rowsOrder', order)"
-                            :key="order"
-                        >
-                            {{ order }}
-                        </li>
-                    </ul>
+        <input class="md:w-1/4 bg-slate-200 rounded-1 border-0 p-2 mr-6 rounded-lg" type="text" placeholder="Search a token" v-model="textSearch" @keyup="$emit('searchToken', textSearch)">
+
+            <!-- Market cap. order filter -->
+            <div class="inline-block mr-6 w-64">
+                <div class="relative" @click="toggleOrder()">
+                    <div class="text-center label cursor-pointer rounded-lg bg-slate-100 p-2">
+                            <span>{{ orderValue }} ⌄</span>
+                    </div>
+                    <div class="w-full absolute bg-slate-300 rounded-b-lg" :class="{ hidden : !visibleOrderFilter, visibleOrderFilter }">
+                        <ul>
+                            <li
+                                class="px-4 py-2 text-center cursor-pointer hover:bg-slate-400"
+                                v-for="order in rowsOrder"
+                                :class="{ current : order === orderValue }"
+                                @click="selectOrder(order); $emit('rowsOrder', order)"
+                                :key="order"
+                            >
+                                {{ order }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Rows number filter-->
-        <div class="inline-block w-20">
-            <div class="relative " @click="toggleRows()">
-                <div class="text-center label cursor-pointer rounded-lg bg-slate-100 px-4 py-2 shadow-lg">
-                        <span>{{ rowsValue }} ⌄</span>
-                </div>
-                <div class="w-full absolute bg-slate-300 rounded-b-lg" :class="{ hidden : !visibleRowsFilter, visibleRowsFilter }">
-                    <ul>
-                        <li
-                            class="px-4 py-2 text-center cursor-pointer hover:bg-slate-400"
-                            v-for="rows in rowsNbr"
-                            :class="{ current : rows === rowsValue }"
-                            @click="selectRows(rows); $emit('rowsNumber', rows)"
-                            :key="rows"
-                        >
-                            {{ rows }}
-                        </li>
-                    </ul>
+            <!-- Rows number filter -->
+            <div class="inline-block w-20 mr-6">
+                <div class="relative " @click="toggleRows()">
+                    <div class="text-center label cursor-pointer rounded-lg bg-slate-100 p-2">
+                            <span>{{ rowsValue }} ⌄</span>
+                    </div>
+                    <div class="w-full absolute bg-slate-300 rounded-b-lg" :class="{ hidden : !visibleRowsFilter, visibleRowsFilter }">
+                        <ul>
+                            <li
+                                class="px-4 py-2 text-center cursor-pointer hover:bg-slate-400"
+                                v-for="rows in rowsNbr"
+                                :class="{ current : rows === rowsValue }"
+                                @click="selectRows(rows); $emit('rowsNumber', rows)"
+                                :key="rows"
+                            >
+                                {{ rows }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
     </div>
 </template>
 
 <style scoped>
+    .top-1px{
+        top: -1px;
+    }
+    .is-pinned{
+        box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
+    }
     .hidden{
         visibility: hidden;
     }
@@ -66,27 +76,42 @@
         name: "filter-bar",
         data(){
             return {
-                rowsNbr: [5, 10, 20, 50, 100],
+                textSearch: "",
+
+                rowsNbr: [10, 20, 50, 100, 250],
                 rowsValue: 100,
                 visibleRowsFilter: false,
+
                 rowsOrder: ["Market cap. ascending order", "Market cap. descending order", "Price ascending order", "Price descending order"],
                 orderValue: "Market cap. descending order",
                 visibleOrderFilter: false
             }
         },
+        mounted() {
+            this.interObserv()
+        },
         methods: {
             toggleRows() {
                 this.visibleRowsFilter = !this.visibleRowsFilter
             },
-            selectRows(rows){
+            selectRows(rows) {
                 this.rowsValue = rows
             },
             toggleOrder() {
                 this.visibleOrderFilter = !this.visibleOrderFilter
             },
-            selectOrder(order){
+            selectOrder(order) {
                 this.orderValue = order
             },
+            interObserv() {
+                const el = document.querySelector(".top-1px")
+                const observer = new IntersectionObserver( 
+                ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
+                    { threshold: [1] }
+                );
+
+                observer.observe(el);
+            }
 		}
     }
 </script>
