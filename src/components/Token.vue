@@ -1,5 +1,5 @@
 <template>
-        <tr @click="tokenClick(token.id)" class="text-center border-b border-slate-200 hover:bg-zinc-200 hover:cursor-pointer">
+        <tr @click="tokenClick(token.id)" class="text-center border-b border-slate-200 hover:bg-zinc-200 dark:hover:bg-slate-700 hover:cursor-pointer">
             <td class="font-bold flex justify-start items-center"><img class="w-8 m-3" :src="token.image" :alt="token.id">{{ token.name }}</td>
             <td class="font-bold">${{ token.current_price }}</td>
             <td :class="[ this.token.price_change_24h > 0 ? 'positive' : 'negative' ]">${{ token.price_change_24h }} <span class="font-bold">|</span> <span >{{ token.price_change_percentage_24h }}%</span></td>
@@ -11,10 +11,10 @@
 
 <style scoped>
     .positive{
-        animation: 5s linear 0s 1 normal forwards running posPrice;
+        animation: 4s linear 0s 1 normal forwards running posPrice;
     }
     .negative{
-        animation: 5s linear 0s 1 normal forwards running negPrice;
+        animation: 4s linear 0s 1 normal forwards running negPrice;
     }
     @keyframes posPrice{
         from {
@@ -30,6 +30,28 @@
         }
         to {
             color: black;
+        }
+    }
+    body.dark .positive{
+        animation: 4s linear 0s 1 normal forwards running posPriceDark;
+    }
+    body.dark .negative{
+        animation: 4s linear 0s 1 normal forwards running negPriceDark;
+    }
+    @keyframes posPriceDark{
+        from {
+            color: rgb(15, 201, 15)
+        }
+        to {
+            color: white;
+        }
+    }
+    @keyframes negPriceDark{
+        from {
+            color: red;
+        }
+        to {
+            color: white;
         }
     }
 </style>

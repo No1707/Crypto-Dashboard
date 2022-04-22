@@ -1,7 +1,10 @@
 <template>
+  <header class="text-center my-20">
+      <h1 class="text-4xl">Welcome to my cryptocurrencie dashboard !</h1> <br>
+      <p class="text-2xl">Made with Vue.js 3, TailwindCSS and Coingecko API.</p>
+  </header>
   <!-- <Preloader v-if="!preloaderOff" @documentReady="documentReady" /> -->
   <!-- <div :class="{ displaying : !docReady }"> -->
-    <DashboardHeader />
     <TokenList />
   <!-- </div> -->
 </template>
@@ -13,14 +16,12 @@
 </style>
 
 <script>
-import DashboardHeader from '../components/DashboardHeader.vue'
 import TokenList from '../components/TokenList.vue'
 // import Preloader from './components/Preloader.vue'
 
 export default {
   name: 'home-view',
   components: {
-    DashboardHeader,
     TokenList,
     // Preloader
   },
