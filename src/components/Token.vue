@@ -1,13 +1,40 @@
 <template>
         <tr @click="tokenClick(token.id)" class="text-center border-b border-slate-200 hover:bg-zinc-200 dark:hover:bg-slate-700 hover:cursor-pointer">
-            <td class="font-bold flex justify-start items-center"><img class="w-8 m-3" :src="token.image" :alt="token.id">{{ token.name }}</td>
-            <td class="font-bold">${{ token.current_price }}</td>
-            <td :class="[ this.token.price_change_24h > 0 ? 'positive' : 'negative' ]">${{ token.price_change_24h }} <span class="font-bold">|</span> <span >{{ token.price_change_percentage_24h }}%</span></td>
-            <td>${{ token.market_cap.toLocaleString() }}</td>
-            <td>${{ token.market_cap_change_24h.toLocaleString() }} <span class="font-bold">|</span> <span>{{ token.market_cap_change_percentage_24h }}%</span></td>
-            <td>{{ token.circulating_supply.toLocaleString() }}</td>
+            <td class="font-bold px-2 py-4">{{ index+1 }}</td>
+            <td class="font-bold flex justify-start items-center px-2 py-4 text-left"><img class="w-8 m-3" :src="token.image" :alt="token.id">{{ token.name }}</td>
+            <td class="font-bold px-2 py-4">${{ token.current_price }}</td>
+            <td class="px-2 py-4" :class="[ this.token.price_change_24h > 0 ? 'positive' : 'negative' ]">${{ token.price_change_24h }} <span class="font-bold">|</span> <span >{{ token.price_change_percentage_24h }}%</span></td>
+            <td class="px-2 py-4">${{ token.market_cap.toLocaleString() }}</td>
+            <td class="px-2 py-4">${{ token.market_cap_change_24h.toLocaleString() }} <span class="font-bold">|</span> <span>{{ token.market_cap_change_percentage_24h }}%</span></td>
+            <td class="px-2 py-4">{{ token.circulating_supply.toLocaleString() }}</td>
         </tr>
 </template>
+
+<script>
+    export default {
+        name: "Token-info",
+        props: {
+            token: {
+                type: Object,
+                required: true
+            },
+            index: {
+                type: Number,
+                required: true
+            }
+        },
+        computed: {
+            commasNumber(nbr) {
+                return console.log(nbr)
+            }
+        },
+        methods: {
+            tokenClick(_id) {
+                this.$router.push({ params: {id: _id} ,name: 'token' })
+            }
+        }
+    }
+</script>
 
 <style scoped>
     .positive{
@@ -55,30 +82,3 @@
         }
     }
 </style>
-
-<script>
-    export default {
-        name: "Token-info",
-        props: {
-            token: {
-                type: Object,
-                required: true
-            }
-        },
-        data() {
-            return {
-                
-            }
-        },
-        computed: {
-            commasNumber(nbr) {
-                return console.log(nbr)
-            }
-        },
-        methods: {
-            tokenClick(_id) {
-                this.$router.push({ params: {id: _id} ,name: 'token' })
-            }
-        }
-    }
-</script>

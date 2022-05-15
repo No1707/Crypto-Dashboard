@@ -6,7 +6,8 @@
         <table class="shadow-lg w-full">
             <thead class="bg-slate-100 dark:bg-slate-700">
                 <tr>
-                    <th class="py-5 px-2 rounded-tl-lg">Nom</th>
+                    <th class="py-5 px-2 rounded-tl-lg">#</th>
+                    <th class="py-5 px-2 text-left">Nom</th>
                     <th class="py-5 px-2">Prix actuel</th>
                     <th class="py-5 px-2">Changement prix 24h</th>
                     <th class="py-5 px-2">Cap. de marché</th>
@@ -15,7 +16,7 @@
                 </tr>
             </thead>
             <tbody v-if="this.allTokens">
-                <Token v-for="token in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token"></Token>
+                <Token v-for="(token, index) in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token" :index="index"></Token>
             </tbody>
         </table>
 

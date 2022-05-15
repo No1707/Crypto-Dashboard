@@ -49,7 +49,7 @@
 
     <div class="px-8 pt-4 flex flex-col justify-center items-center">
       <h3 class="font-bold text-2xl underlined"><span class="capitalize">{{token}}</span> description :</h3>
-      <p class="description">Desc ?</p>
+      <p v-html="data.description.en"></p>
     </div>
       
 
@@ -83,15 +83,3 @@ import { useRoute } from 'vue-router'
     }
   }
 </script>
-
-<style scoped>
-  .tokenBg::before{
-    /* content: '';
-    background-image: v-bind('url('data.image.large')');
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: -1; */
-  }
-</style>
