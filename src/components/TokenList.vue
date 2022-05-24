@@ -5,7 +5,7 @@
 
         <table class="shadow-lg w-full">
             <thead class="bg-slate-100 dark:bg-slate-700">
-                <tr>
+                <tr class="border-b border-slate-200">
                     <th class="py-5 px-2 rounded-tl-lg">#</th>
                     <th class="py-5 px-2 text-left">Nom</th>
                     <th class="py-5 px-2">Prix actuel</th>
@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody v-if="this.allTokens">
-                <Token v-for="(token, index) in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token" :index="index"></Token>
+                <Token v-for="(token, index) in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency"></Token>
             </tbody>
         </table>
 
@@ -34,21 +34,22 @@ import Filter from './Filter.vue'
             Filter
         },
         mounted() {
-            this.fetching()
-            // setInterval(this.fetching, 5000)
+            this.fetching(this.chosenCurrency)
+            // setInterval(this.fetching(this.chosenCurrency), 5000)
         },
         data() {
             return{
                 filteredTokens: [],
                 allTokens: [],
                 rowsNbr: 100,
-                order: ""
+                order: "",
+                chosenCurrency: this.$store.state.currency.toLowerCase()
             }
         },
         methods: {
-            async fetching(){
+            async fetching(cur){
                 const res = await fetch(
-                    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h'
+                    'https://api.coingecko.com/api/v3/coins/markets?vs_currency='+cur+'&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h'
                 )
                 if(res.ok){
                     // console.log(res)
@@ -93,6 +94,12 @@ import Filter from './Filter.vue'
                     token.symbol.toLowerCase().includes(val.toLowerCase())
                 )
                 this.rowsOrder(this.order)
+            }
+        },
+        watch: {
+            '$store.state.currency'(cur) {
+                this.chosenCurrency = cur.toLowerCase()
+                this.fetching(cur)
             }
         }
     }

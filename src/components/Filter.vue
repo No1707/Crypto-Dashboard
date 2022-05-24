@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 flex items-center w-full sticky top-1px bg-white dark:bg-slate-800 transition rounded-lg z-10">
+    <div class="p-4 flex items-center w-full sticky top-1px bg-white dark:bg-slate-800 transition-shadow rounded-lg z-10">
 
         <input class="md:w-1/4 bg-slate-200 dark:bg-slate-700 rounded-1 border-0 p-2 mr-6 rounded-lg" type="text" placeholder="Search a token" v-model="textSearch" @keyup="$emit('searchToken', textSearch)">
 

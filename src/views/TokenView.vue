@@ -18,13 +18,13 @@
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full m-6">
           <div class="flex flex-col min-w-full">
             <h2 class="text-slate-400 uppercase font-bold text-sm ">price</h2>
-            <p class="font-bold text-xl">${{ data.market_data.current_price.usd }}</p>
+            <p class="font-bold text-xl">{{currencySign}} {{ data.market_data.current_price[chosenCurrency].toLocaleString() }}</p>
           </div>
         </div>
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full m-6">
           <div class="flex flex-col">
             <h2 class="text-slate-400 uppercase font-bold text-sm ">market cap.</h2>
-            <p class="font-bold text-xl">${{ data.market_data.market_cap.usd.toLocaleString() }}</p>
+            <p class="font-bold text-xl">{{currencySign}} {{ data.market_data.market_cap[chosenCurrency].toLocaleString() }}</p>
           </div>
         </div>
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full m-6">
@@ -34,22 +34,27 @@
           </div>
         </div>
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full m-6">
-          <div class="flex flex-col" v-if="data.market_data.fully_diluted_valuation.usd !== undefined">
+          <div class="flex flex-col" v-if="data.market_data.fully_diluted_valuation[chosenCurrency] !== undefined">
             <h2 class="text-slate-400 uppercase font-bold text-sm ">fully diluted valuation</h2>
-            <p class="font-bold text-xl">${{ data.market_data.fully_diluted_valuation.usd.toLocaleString() }}</p>
+            <p class="font-bold text-xl">{{currencySign}} {{ data.market_data.fully_diluted_valuation[chosenCurrency].toLocaleString() }}</p>
           </div>
           <div class="flex flex-col" v-else>
             <h2 class="text-slate-400 uppercase font-bold text-sm ">total volume</h2>
-            <p class="font-bold text-xl">${{ data.market_data.total_volume.usd.toLocaleString() }}</p>
+            <p class="font-bold text-xl">{{currencySign}}   {{ data.market_data.total_volume[chosenCurrency].toLocaleString() }}</p>
           </div>
         </div>
       </div>
 
     </div>
 
-    <div class="px-8 pt-4 flex flex-col justify-center items-center">
-      <h3 class="font-bold text-2xl underlined"><span class="capitalize">{{token}}</span> description :</h3>
-      <p v-html="data.description.en"></p>
+    <div class="p-6 flex flex-col justify-center items-center">
+
+      <div class="max-w-5xl" v-if="data.description.en">
+        <h3 class="font-bold text-2xl leading-loose underlined"><span class="capitalize">{{token}}</span> description :</h3>
+        <p v-html="data.description.en"></p>
+      </div>
+
+
     </div>
       
 
@@ -64,6 +69,7 @@ import { useRoute } from 'vue-router'
     data(){
       return {
         token: '',
+        chosenCurrency: this.$store.state.currency.toLowerCase(),
         data: null
       }
     },
@@ -79,6 +85,25 @@ import { useRoute } from 'vue-router'
         )
         const data = await res.json()
         this.data = data
+        // console.log(data)
+      }
+    },
+    computed: {
+      currencySign() {
+        const currency = this.chosenCurrency
+        if(currency === 'usd') return 'US$'
+        if(currency === 'eur') return '€'
+        if(currency === 'jpy') return '¥'
+        if(currency === 'gbp') return '£'
+        if(currency === 'chf') return 'CHF'
+        if(currency === 'cad') return 'CA$'
+        if(currency === 'nzd') return 'NZ$'
+        return '$'
+      }
+    },
+    watch: {
+      '$store.state.currency'(cur) {
+        this.chosenCurrency = cur.toLowerCase()
       }
     }
   }

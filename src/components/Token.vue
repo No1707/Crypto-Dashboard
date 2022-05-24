@@ -1,12 +1,12 @@
 <template>
         <tr @click="tokenClick(token.id)" class="text-center border-b border-slate-200 hover:bg-zinc-200 dark:hover:bg-slate-700 hover:cursor-pointer">
-            <td class="font-bold px-2 py-4">{{ index+1 }}</td>
-            <td class="font-bold flex justify-start items-center px-2 py-4 text-left"><img class="w-8 m-3" :src="token.image" :alt="token.id">{{ token.name }}</td>
-            <td class="font-bold px-2 py-4">${{ token.current_price }}</td>
-            <td class="px-2 py-4" :class="[ this.token.price_change_24h > 0 ? 'positive' : 'negative' ]">${{ token.price_change_24h }} <span class="font-bold">|</span> <span >{{ token.price_change_percentage_24h }}%</span></td>
-            <td class="px-2 py-4">${{ token.market_cap.toLocaleString() }}</td>
-            <td class="px-2 py-4">${{ token.market_cap_change_24h.toLocaleString() }} <span class="font-bold">|</span> <span>{{ token.market_cap_change_percentage_24h }}%</span></td>
-            <td class="px-2 py-4">{{ token.circulating_supply.toLocaleString() }}</td>
+            <td class="font-bold p-2">{{ index+1 }}</td>
+            <td class="font-bold flex justify-start items-center p-2 text-left"><img class="w-8 m-3" :src="token.image" :alt="token.id">{{ token.name }}</td>
+            <td class="font-bold p-2">{{currencySign}}{{ token.current_price }}</td>
+            <td class="p-2" :class="[ this.token.price_change_24h > 0 ? 'positive' : 'negative' ]">{{currencySign}}{{ token.price_change_24h }} <span class="font-bold">|</span> <span >{{ token.price_change_percentage_24h }}%</span></td>
+            <td class="p-2">{{currencySign}}{{ token.market_cap.toLocaleString() }}</td>
+            <td class="p-2">{{currencySign}}{{ token.market_cap_change_24h.toLocaleString() }} <span class="font-bold">|</span> <span>{{ token.market_cap_change_percentage_24h }}%</span></td>
+            <td class="p-2">{{ token.circulating_supply.toLocaleString() }}</td>
         </tr>
 </template>
 
@@ -21,16 +21,28 @@
             index: {
                 type: Number,
                 required: true
+            },
+            chosenCurrency: {
+                type: String,
+                required: true
             }
         },
         computed: {
-            commasNumber(nbr) {
-                return console.log(nbr)
+            currencySign() {
+                const currency = this.chosenCurrency
+                if(currency === 'usd') return 'US$'
+                if(currency === 'eur') return '€'
+                if(currency === 'jpy') return '¥'
+                if(currency === 'gbp') return '£'
+                if(currency === 'chf') return 'CHF'
+                if(currency === 'cad') return 'CA$'
+                if(currency === 'nzd') return 'NZ$'
+                return '$'
             }
         },
         methods: {
             tokenClick(_id) {
-                this.$router.push({ params: {id: _id} ,name: 'token' })
+                this.$router.push({ params: {id: _id}, name: 'token' })
             }
         }
     }
