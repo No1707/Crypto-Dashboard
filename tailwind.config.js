@@ -9,6 +9,10 @@ module.exports = {
       },
       zIndex: {
         '-1': '-1'
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem'
       }
     },
   },

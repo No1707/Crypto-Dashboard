@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center mb-10 mx-auto w-4/5">
+    <div class="flex flex-col items-center mb-10 mx-auto max-w-8xl p-8">
         
         <Filter @rowsNumber="rowsNumber" @rowsOrder="rowsOrder" @searchToken="searchToken"/>
 
@@ -35,7 +35,7 @@ import Filter from './Filter.vue'
         },
         mounted() {
             this.fetching(this.chosenCurrency)
-            // setInterval(this.fetching(this.chosenCurrency), 5000)
+            // setInterval(() => {this.fetching(this.chosenCurrency)}, 5000)
         },
         data() {
             return{

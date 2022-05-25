@@ -60,30 +60,30 @@
         stroke-dashoffset: 2110;
         stroke-width:2;
         stroke-linecap:round;
-        animation: dash 6s linear infinite;
+        animation: dash 5s linear infinite;
         fill-opacity:0;
         stroke:orange;
     }
 
     @keyframes dash {
-    0% {
-        stroke-dashoffset: 2110;
-        opacity:0;
-        stroke:orange;
-    }
-    15%{
-        opacity:1;
-        stroke:orange;
-    }
-    70%{
-        opacity:1;
-        stroke:orange;
-    }
-    100%{
-        stroke-dashoffset:0;
-        opacity:0;
-        stroke:yellow;
-    }
+        0% {
+            stroke-dashoffset: 2110;
+            opacity:0;
+            stroke:orange;
+        }
+        15%{
+            opacity:1;
+            stroke:orange;
+        }
+        70%{
+            opacity:1;
+            stroke:orange;
+        }
+        100%{
+            stroke-dashoffset:0;
+            opacity:0;
+            stroke:yellow;
+        }
     }
 </style>
 
@@ -101,7 +101,7 @@
                     this.$emit('documentReady')
                     this.isLoaded = true
                 }
-            }, 5000)
+            }, 4000)
         }
     }
 </script>

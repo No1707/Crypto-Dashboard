@@ -2,7 +2,7 @@
 
   <div class="dark:bg-slate-800 dark:text-white min-h-screen">
 
-    <nav class="navBar transition-shadow sticky w-full flex justify-center items-center bg-white p-4 dark:bg-slate-800">
+    <nav class="navBar transition-shadow sticky w-full flex justify-center items-center bg-white p-4 dark:bg-slate-800 z-20">
 
       <!-- Currency chooser -->
       <div class="inline-block mr-6 w-28">
@@ -10,10 +10,10 @@
             <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
               <span>{{ currencyValue }} ˅</span>
             </div>
-            <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg" :class="{ hidden : !visibleCurrencyFilter, visibleCurrencyFilter }">
+            <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !visibleCurrencyFilter, visibleCurrencyFilter }">
               <ul>
                 <li
-                  class="px-4 py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600"
+                  class="px-4 py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 first:rounded-t-lg last:rounded-b-lg"
                   v-for="currency in currencies"
                   :class="{ current : currency === currencyValue }"
                   @click="selectCurrency(currency)"
@@ -58,7 +58,6 @@
       }
     },
     mounted() {
-      this.interObserv()
       this.getDarkMode()
     },
     methods: {
@@ -67,15 +66,6 @@
       },
       selectCurrency(cur) {
         this.$store.commit('changeCurrency', cur)
-      },
-      interObserv() {
-        const el = document.querySelector(".navBar")
-          const observer = new IntersectionObserver( 
-          ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
-            { threshold: 1 }
-          );
-
-        observer.observe(el);
       },
       getDarkMode() {
         let darkStorage = localStorage.getItem('dark')
@@ -118,12 +108,6 @@
 <style scoped>
   .navBar{
     top: -1px;
-    z-index: 2;
-  }
-  .is-pinned{
-    box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
   }
   .hidden{
     visibility: hidden;

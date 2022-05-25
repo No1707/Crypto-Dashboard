@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 flex items-center w-full sticky top-1px bg-white dark:bg-slate-800 transition-shadow rounded-lg z-10">
+    <div class="p-4 flex items-center w-full sticky top-1px bg-white dark:bg-slate-800 transition-shadow z-10">
 
         <input class="md:w-1/4 bg-slate-200 dark:bg-slate-700 rounded-1 border-0 p-2 mr-6 rounded-lg" type="text" placeholder="Search a token" v-model="textSearch" @keyup="$emit('searchToken', textSearch)">
 
@@ -9,10 +9,10 @@
                 <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
                         <span>{{ orderValue }} ˅</span>
                 </div>
-                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg" :class="{ hidden : !visibleOrderFilter, visibleOrderFilter }">
+                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !visibleOrderFilter, visibleOrderFilter }">
                     <ul>
                         <li
-                            class="px-4 py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600"
+                            class="px-4 py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 first:rounded-t-lg last:rounded-b-lg"
                             v-for="order in rowsOrder"
                             :class="{ current : order === orderValue }"
                             @click="selectOrder(order); $emit('rowsOrder', order)"
@@ -31,10 +31,10 @@
                 <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
                         <span>{{ rowsValue }} ˅</span>
                 </div>
-                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg" :class="{ hidden : !visibleRowsFilter, visibleRowsFilter }">
+                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !visibleRowsFilter, visibleRowsFilter }">
                     <ul>
                         <li
-                            class="px-4 py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600"
+                            class="px-4 py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 first:rounded-t-lg last:rounded-b-lg"
                             v-for="rows in rowsNbr"
                             :class="{ current : rows === rowsValue }"
                             @click="selectRows(rows); $emit('rowsNumber', rows)"
@@ -53,13 +53,6 @@
 <style scoped>
     .top-1px{
         top: 70px;
-    }
-    .is-pinned{
-        box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
-        -webkit-box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 15px 20px -16px rgba(0,0,0,0.75);
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
     }
     .hidden{
         visibility: hidden;
@@ -96,9 +89,6 @@
                 visibleOrderFilter: false,
             }
         },
-        mounted() {
-            this.interObserv()
-        },
         methods: {
             toggleRows() {
                 this.visibleRowsFilter = !this.visibleRowsFilter
@@ -111,15 +101,6 @@
             },
             selectOrder(order) {
                 this.orderValue = order
-            },
-            interObserv() {
-                const el = document.querySelector(".top-1px")
-                const observer = new IntersectionObserver( 
-                ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
-                    { rootMargin: "-100px", threshold: 1 }
-                );
-
-                observer.observe(el);
             }
 		}
     }
