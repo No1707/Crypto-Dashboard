@@ -101,7 +101,7 @@
                     this.$emit('documentReady')
                     this.isLoaded = true
                 }
-            }, 4000)
+            }, 2000)
         }
     }
 </script>

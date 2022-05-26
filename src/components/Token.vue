@@ -4,9 +4,9 @@
             <td class="font-bold flex justify-start items-center p-2 text-left"><img class="w-8 m-3" :src="token.image" :alt="token.id">{{ token.name }}</td>
             <td class="font-bold p-2">{{currencySign}}{{ token.current_price }}</td>
             <td class="p-2" :class="[ this.token.price_change_24h > 0 ? 'positive' : 'negative' ]">{{currencySign}}{{ token.price_change_24h }} <span class="font-bold">|</span> <span >{{ token.price_change_percentage_24h }}%</span></td>
-            <td class="p-2">{{currencySign}}{{ token.market_cap.toLocaleString() }}</td>
-            <td class="p-2">{{currencySign}}{{ token.market_cap_change_24h.toLocaleString() }} <span class="font-bold">|</span> <span>{{ token.market_cap_change_percentage_24h }}%</span></td>
-            <td class="p-2">{{ token.circulating_supply.toLocaleString() }}</td>
+            <td class="hidden md:table-cell p-2">{{currencySign}}{{ token.market_cap.toLocaleString() }}</td>
+            <td class="hidden lg:table-cell p-2">{{currencySign}}{{ token.market_cap_change_24h.toLocaleString() }} <span class="font-bold">|</span> <span>{{ token.market_cap_change_percentage_24h }}%</span></td>
+            <td class="hidden xl:table-cell p-2">{{ token.circulating_supply.toLocaleString() }}</td>
         </tr>
 </template>
 
@@ -30,7 +30,7 @@
         computed: {
             currencySign() {
                 const currency = this.chosenCurrency
-                if(currency === 'usd') return 'US$'
+                if(currency === 'usd') return '$'
                 if(currency === 'eur') return '€'
                 if(currency === 'jpy') return '¥'
                 if(currency === 'gbp') return '£'

@@ -1,18 +1,18 @@
 <template>
-    <div class="flex flex-col items-center mb-10 mx-auto max-w-8xl p-8">
+    <div class="flex flex-col items-center mb-2 mx-auto max-w-8xl md:p-8">
         
         <Filter @rowsNumber="rowsNumber" @rowsOrder="rowsOrder" @searchToken="searchToken"/>
 
         <table class="shadow-lg w-full">
             <thead class="bg-slate-100 dark:bg-slate-700">
                 <tr class="border-b border-slate-200">
-                    <th class="py-5 px-2 rounded-tl-lg">#</th>
-                    <th class="py-5 px-2 text-left">Nom</th>
+                    <th class="py-5 px-2 md:rounded-tl-lg">#</th>
+                    <th class="py-5 px-2 text-left w-2/12 sm:w-1/5 md:w-auto">Nom</th>
                     <th class="py-5 px-2">Prix actuel</th>
                     <th class="py-5 px-2">Changement prix 24h</th>
-                    <th class="py-5 px-2">Cap. de marché</th>
-                    <th class="py-5 px-2">Changement cap. marché 24h</th>
-                    <th class="py-5 px-2 rounded-tr-lg">Tokens en ciruclation</th>
+                    <th class="hidden md:table-cell py-5 px-2 md:rounded-tr-lg lg:rounded-none">Cap. de marché</th>
+                    <th class="hidden lg:table-cell py-5 px-2 lg:rounded-tr-lg xl:rounded-none">Changement cap. marché 24h</th>
+                    <th class="hidden xl:table-cell py-5 px-2 rounded-tr-lg">Tokens en ciruclation</th>
                 </tr>
             </thead>
             <tbody v-if="this.allTokens">
@@ -35,7 +35,7 @@ import Filter from './Filter.vue'
         },
         mounted() {
             this.fetching(this.chosenCurrency)
-            // setInterval(() => {this.fetching(this.chosenCurrency)}, 5000)
+            setInterval(() => {this.fetching(this.chosenCurrency)}, 5000)
         },
         data() {
             return{

@@ -1,11 +1,11 @@
 <template>
 
-  <div class="dark:bg-slate-800 dark:text-white min-h-screen">
+  <div class="dark:bg-slate-800 dark:text-white min-h-screen text-xs md:text-base">
 
     <nav class="navBar transition-shadow sticky w-full flex justify-center items-center bg-white p-4 dark:bg-slate-800 z-20">
 
       <!-- Currency chooser -->
-      <div class="inline-block mr-6 w-28">
+      <div class="inline-block mx-6 w-28">
         <div class="relative" @click="toggleCurrency()">
             <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
               <span>{{ currencyValue }} ˅</span>
@@ -27,20 +27,30 @@
       </div>
 
       <!-- Toggle dark mode -->
-      <div
-        class="w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 duration-300 cursor-pointer"
-        :class="{ 'bg-slate-600': darkMode }"
-        @click="darkModeToggle"
-      >
-        <div
-          class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300"
-          :class="{ 'translate-x-6': darkMode }"
-        ></div>
+
+      <div class="mx-6 flex items-center">
+        <div>
+          <div
+            class="w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 duration-300 cursor-pointer"
+            :class="{ 'bg-slate-600': darkMode }"
+            @click="darkModeToggle"
+          >
+            <div
+              class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300"
+              :class="{ 'translate-x-6': darkMode }"
+            >
+            </div>
+          </div>
+        </div>
+        <img class="mx-4 w-8" :src="darkMode ? sunSRC : moonSRC" alt="dark mode icon">
       </div>
 
     </nav>
 
     <router-view />
+    <footer class="py-4 text-center border-t border-white mt-10">
+        © 2022 Nolan BOISEL
+    </footer>
   </div>
   
 
@@ -54,7 +64,9 @@
       return {
         currencies: ["USD", "EUR", "JPY", "GBP", "CHF", "CAD", "NZD"],
         visibleCurrencyFilter: false,
-        darkMode: null
+        darkMode: null,
+        moonSRC: require(`./assets/moon.svg`),
+        sunSRC: require(`./assets/sun.svg`)
       }
     },
     mounted() {
