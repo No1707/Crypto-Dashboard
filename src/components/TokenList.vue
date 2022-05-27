@@ -59,6 +59,7 @@ import Filter from './Filter.vue'
                 const data = await res.json()
                 this.allTokens = data
                 this.filteredTokens = data
+                this.rowsOrder(this.order)
             },
             rowsNumber(rows){
                 this.rowsNbr = rows
