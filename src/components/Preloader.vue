@@ -47,7 +47,6 @@
     } 
 
     #bitcoin{
-        padding-top:80px;
         width:200px;
         margin:0 auto;
         display:block;

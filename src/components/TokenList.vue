@@ -43,6 +43,7 @@ import Filter from './Filter.vue'
                 allTokens: [],
                 rowsNbr: 100,
                 order: "",
+                search: "",
                 chosenCurrency: this.$store.state.currency.toLowerCase()
             }
         },
@@ -59,7 +60,7 @@ import Filter from './Filter.vue'
                 const data = await res.json()
                 this.allTokens = data
                 this.filteredTokens = data
-                this.rowsOrder(this.order)
+                this.searchToken(this.search)
             },
             rowsNumber(rows){
                 this.rowsNbr = rows
@@ -90,9 +91,10 @@ import Filter from './Filter.vue'
                 }
             },
             searchToken(val) {
+                this.search = val
                 this.filteredTokens = this.allTokens.filter( token => 
-                    token.name.toLowerCase().includes(val.toLowerCase()) ||
-                    token.symbol.toLowerCase().includes(val.toLowerCase())
+                    token.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                    token.symbol.toLowerCase().includes(this.search.toLowerCase())
                 )
                 this.rowsOrder(this.order)
             }

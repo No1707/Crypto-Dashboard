@@ -5,7 +5,7 @@
     <nav class="navBar transition-shadow sticky w-full flex justify-center items-center bg-white p-4 dark:bg-slate-800 z-20">
 
       <!-- Currency chooser -->
-      <div class="inline-block mx-6 w-28">
+      <div class="inline-block mx-6 w-18 sm:w-20">
         <div class="relative" @click="toggleCurrency()">
             <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
               <span>{{ currencyValue }} ˅</span>
@@ -42,7 +42,7 @@
             </div>
           </div>
         </div>
-        <img class="mx-4 w-8" :src="darkMode ? sunSRC : moonSRC" alt="dark mode icon">
+        <img class="mx-4 w-6" :src="darkMode ? sunSRC : moonSRC" alt="dark mode icon">
       </div>
 
     </nav>
