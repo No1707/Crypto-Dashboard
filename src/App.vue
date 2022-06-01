@@ -2,7 +2,7 @@
 
   <div class="dark:bg-slate-800 dark:text-white min-h-screen text-xs md:text-base">
 
-    <nav class="navBar transition-shadow sticky w-full flex justify-center items-center bg-white p-4 dark:bg-slate-800 z-20">
+    <nav class="top-[-1px] transition-shadow sticky w-full flex justify-center items-center bg-white p-2 md:p-4 dark:bg-slate-800 z-20">
 
       <!-- Currency chooser -->
       <div class="inline-block mx-6 w-18 sm:w-20">
@@ -118,9 +118,6 @@
 </style>
 
 <style scoped>
-  .navBar{
-    top: -1px;
-  }
   .hidden{
     visibility: hidden;
   }
