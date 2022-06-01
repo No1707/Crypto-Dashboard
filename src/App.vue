@@ -27,7 +27,6 @@
       </div>
 
       <!-- Toggle dark mode -->
-
       <div class="mx-6 flex items-center">
         <div>
           <div
