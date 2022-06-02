@@ -47,9 +47,12 @@
     </nav>
 
     <router-view />
+    
+    <!-- footer -->
     <footer class="py-4 text-center border-t border-white mt-10">
         © 2022 Nolan BOISEL
     </footer>
+
   </div>
   
 

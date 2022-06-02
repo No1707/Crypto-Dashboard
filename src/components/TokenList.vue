@@ -1,6 +1,7 @@
 <template>
     <div class="flex flex-col items-center mb-2 mx-auto max-w-8xl md:p-8">
         
+        <!-- filtre -->
         <Filter @rowsNumber="rowsNumber" @rowsOrder="rowsOrder" @searchToken="searchToken"/>
 
         <table class="shadow-lg w-full">
@@ -15,9 +16,11 @@
                     <th class="hidden xl:table-cell py-5 px-2 rounded-tr-lg">Tokens en ciruclation</th>
                 </tr>
             </thead>
+
             <tbody v-if="this.allTokens">
                 <Token v-for="(token, index) in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency"></Token>
             </tbody>
+            
         </table>
 
     </div>
