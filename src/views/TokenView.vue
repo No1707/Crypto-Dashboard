@@ -16,29 +16,38 @@
 
       <!-- Datas -->
       <div class="flex flex-wrap justify-center xl:flex-nowrap xl:justify-between px-8 md:px-14">
+
+        <!-- current price -->
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full text-center md:text-left md:w-2/5 xl:w-full  m-6">
           <div class="flex flex-col min-w-full">
             <h2 class="text-slate-400 uppercase font-bold text-xs md:text-sm ">price</h2>
             <p class="font-bold text-base md:text-xl">{{currencySign}} {{ data.market_data.current_price[chosenCurrency].toLocaleString() }}</p>
           </div>
         </div>
+
+        <!-- market_cap -->
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full text-center md:text-left md:w-2/5 xl:w-full  m-6">
           <div class="flex flex-col">
             <h2 class="text-slate-400 uppercase font-bold text-xs md:text-sm ">market cap.</h2>
             <p class="font-bold text-base md:text-xl">{{currencySign}} {{ data.market_data.market_cap[chosenCurrency].toLocaleString() }}</p>
           </div>
         </div>
+        
+        <!-- circulating supply -->
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full text-center md:text-left md:w-2/5 xl:w-full  m-6">
           <div class="flex flex-col">
             <h2 class="text-slate-400 uppercase font-bold text-xs md:text-sm ">circulating supply</h2>
             <p class="font-bold text-base md:text-xl">{{ data.market_data.circulating_supply.toLocaleString() }} tokens</p>
           </div>
         </div>
+
         <div class="bg-white dark:bg-slate-800 p-4 rounded shadow-lg w-full text-center md:text-left md:w-2/5 xl:w-full  m-6">
+          <!-- diluted valuation -->
           <div class="flex flex-col" v-if="data.market_data.fully_diluted_valuation[chosenCurrency] !== undefined">
             <h2 class="text-slate-400 uppercase font-bold text-xs md:text-sm ">fully diluted valuation</h2>
             <p class="font-bold text-base md:text-xl">{{currencySign}} {{ data.market_data.fully_diluted_valuation[chosenCurrency].toLocaleString() }}</p>
           </div>
+          <!-- total volume -->
           <div class="flex flex-col" v-else>
             <h2 class="text-slate-400 uppercase font-bold text-xs md:text-sm ">total volume</h2>
             <p class="font-bold text-base md:text-xl">{{currencySign}}   {{ data.market_data.total_volume[chosenCurrency].toLocaleString() }}</p>

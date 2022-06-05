@@ -71,6 +71,7 @@
             color: black;
         }
     }
+    /* Dark mode */
     body.dark .positive{
         animation: 4s linear 0s 1 normal forwards running posPriceDark;
     }
