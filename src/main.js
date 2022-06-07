@@ -7,12 +7,16 @@ import router from './router'
 const store = createStore({
     state() {
         return {
-            currency: "USD"
+            currency: "USD",
+            darkMode: false
         }
     },
     mutations: {
         changeCurrency(state, cur) {
             state.currency = cur
+        },
+        toggleDark(state, val) {
+            state.darkMode = val
         }
     }
 })

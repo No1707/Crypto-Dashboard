@@ -49,7 +49,7 @@
     <router-view />
     
     <!-- footer -->
-    <footer class="py-4 text-center border-t border-white mt-10">
+    <footer class="py-4 text-center border-t border-black dark:border-white mt-10">
         © 2022 Nolan BOISEL
     </footer>
 
@@ -90,6 +90,7 @@
         }
         if(darkStorage !== null){
           this.darkMode = darkStorage
+          this.$store.commit('toggleDark', darkStorage)
           this.darkMode ? document.querySelector("body").classList.add("dark") : document.querySelector("body").classList.remove("dark")
         } else {
           localStorage.setItem('dark', false)
@@ -98,6 +99,7 @@
       },
       darkModeToggle() {
         this.darkMode = !this.darkMode
+        this.$store.commit('toggleDark', this.darkMode)
         localStorage.setItem('dark', this.darkMode)
         const body = document.querySelector("body")
         this.darkMode ? body.classList.add("dark") : body.classList.remove("dark")

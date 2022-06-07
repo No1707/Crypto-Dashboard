@@ -57,6 +57,9 @@
 
     </div>
 
+    <!-- Chart -->
+    <Chart :token="tokenSymbol" />
+
     <!-- Desc -->
     <div class="p-6 flex flex-col justify-center items-center">
 
@@ -74,13 +77,18 @@
 
 <script>
 import { useRoute } from 'vue-router'
+import Chart from '../components/Chart.vue'
 
   export default {
     name: 'token-view',
+    components: {
+      Chart
+    },
     data(){
       return {
         token: '',
         chosenCurrency: this.$store.state.currency.toLowerCase(),
+        tokenSymbol: '',
         data: null
       }
     },
@@ -96,6 +104,7 @@ import { useRoute } from 'vue-router'
         )
         const data = await res.json()
         this.data = data
+        this.tokenSymbol = data.symbol.toUpperCase()
         // console.log(data)
       }
     },
