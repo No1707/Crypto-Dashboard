@@ -2,7 +2,7 @@
     <div class="px-4 md:px-14 mx-auto xl:max-w-7xl mt-8 h-72 lg:h-[32rem] lg:min-h-[32rem] chart-container" id="tradingview_149c6">
         <div class="tradingview-widget-container h-full">
             <div id="tradingview_cddc6"></div>
-            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL Chart</span></a> by TradingView</div>
+            <div class="tradingview-widget-copyright text-xl text-black dark:text-white ">{{chartSymbol}} by TradingView</div>
         </div>
     </div>
 </template>

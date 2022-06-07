@@ -63,7 +63,7 @@
     <!-- Desc -->
     <div class="p-6 flex flex-col justify-center items-center">
 
-      <div class="max-w-5xl px-4 sm:px-12" v-if="data.description.en">
+      <div class="max-w-5xl px-4 sm:px-12 tokenDescription" v-if="data.description.en">
         <h3 class="my-4 font-bold text-2xl leading-loose underlined"><span class="capitalize">{{token}}</span> description :</h3>
         <p v-html="data.description.en"></p>
       </div>
@@ -128,3 +128,10 @@ import Chart from '../components/Chart.vue'
     }
   }
 </script>
+
+<style>
+  .tokenDescription a{
+    font-weight: bold;
+    text-decoration: underline;
+  }
+</style>
