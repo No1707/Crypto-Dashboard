@@ -46,8 +46,7 @@ import Filter from './Filter.vue'
                 allTokens: [],
                 rowsNbr: 100,
                 order: "",
-                search: "",
-                chosenCurrency: this.$store.state.currency.toLowerCase()
+                search: ""
             }
         },
         methods: {
@@ -104,8 +103,12 @@ import Filter from './Filter.vue'
         },
         watch: {
             '$store.state.currency'(cur) {
-                this.chosenCurrency = cur.toLowerCase()
                 this.fetching(cur)
+            }
+        },
+        computed: {
+            chosenCurrency() {
+                return this.$store.state.currency.toLowerCase()
             }
         }
     }

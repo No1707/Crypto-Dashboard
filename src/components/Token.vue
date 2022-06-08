@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        name: "Token-info",
+        name: "token-info",
         props: {
             token: {
                 type: Object,
@@ -30,14 +30,16 @@
         computed: {
             currencySign() {
                 const currency = this.chosenCurrency
-                if(currency === 'usd') return '$'
-                if(currency === 'eur') return '€'
-                if(currency === 'jpy') return '¥'
-                if(currency === 'gbp') return '£'
-                if(currency === 'chf') return 'CHF'
-                if(currency === 'cad') return 'CA$'
-                if(currency === 'nzd') return 'NZ$'
-                return '$'
+                switch(currency){
+                case 'usd': return '$'
+                case 'eur': return '€'
+                case 'jpy': return '¥'
+                case 'gbp': return '£'
+                case 'chf': return 'CHF'
+                case 'cad': return 'CA$'
+                case 'nzd': return 'NZ$'
+                }
+                return ''
             }
         },
         methods: {

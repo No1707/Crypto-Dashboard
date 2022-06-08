@@ -1,12 +1,18 @@
 <template>
+
+  <!-- hero text -->
   <header class="text-center my-10 mx-2 lg:my-16 ">
       <h1 class="text-2xl lg:text-4xl">Welcome to my cryptocurrencie dashboard !</h1> <br>
       <p class="text-lg lg:text-2xl">Made with Vue.js 3, TailwindCSS and Coingecko API.</p>
   </header>
+
+  <!-- Preloader -->
   <Preloader v-if="!preloaderOff" @documentReady="documentReady" />
+
   <div :class="{ displaying : !docReady }">
     <TokenList />
   </div>
+  
 </template>
 
 <style scoped>
