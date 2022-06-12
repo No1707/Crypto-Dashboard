@@ -8,7 +8,10 @@ const store = createStore({
     state() {
         return {
             currency: "USD",
-            darkMode: false
+            darkMode: false,
+            visibleCurrencyFilter: false,
+            visibleOrderFilter: false,
+            visibleRowsFilter: false,
         }
     },
     mutations: {
@@ -17,6 +20,21 @@ const store = createStore({
         },
         toggleDark(state, val) {
             state.darkMode = val
+        },
+        toggleFilters(state, filter){
+            if(filter === 'currency'){
+                state.visibleCurrencyFilter = !state.visibleCurrencyFilter
+                state.visibleOrderFilter=false
+                state.visibleRowsFilter=false
+            } else if(filter === 'order'){
+                state.visibleOrderFilter = !state.visibleOrderFilter
+                state.visibleCurrencyFilter = false
+                state.visibleRowsFilter = false
+            } else if(filter === 'rows'){
+                state.visibleRowsFilter = !state.visibleRowsFilter
+                state.visibleOrderFilter = false
+                state.visibleCurrencyFilter = false
+            }
         }
     }
 })

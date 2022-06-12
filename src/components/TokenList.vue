@@ -74,22 +74,22 @@ import Filter from './Filter.vue'
                         this.filteredTokens.sort((a, b) => {
                             return a.market_cap - b.market_cap;
                         })
-                    break;
+                    break
                     case "Market cap. descending order":
                         this.filteredTokens.sort((a, b) => {
                             return a.market_cap - b.market_cap;
                         }).reverse()
-                    break;
+                    break
                     case "Price ascending order":
                         this.filteredTokens.sort((a, b) => {
                             return a.current_price - b.current_price;
                         })
-                    break;
+                    break
                     case "Price descending order":
                         this.filteredTokens.sort((a, b) => {
                             return a.current_price - b.current_price;
                         }).reverse()
-                    break;
+                    break
                 }
             },
             searchToken(val) {

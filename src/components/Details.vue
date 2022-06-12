@@ -9,7 +9,7 @@
         <img class="object-cover ml-6 mr-4 md:ml-12 md:mr-6" :src="tokenData.image.small" alt="Token logo">
         
         <!-- Name -->
-        <h1 class="font-bold text-3xl md:text-5xl uppercase"> {{ tokenData.id }} </h1>
+        <h1 class="font-bold text-3xl md:text-4xl uppercase"> {{ tokenData.id }} ({{tokenData.symbol}}) </h1>
       </div>
 
       <!-- Datas -->
@@ -67,8 +67,7 @@
         },
         computed: {
             currencySign() {
-                const currency = this.chosenCurrency
-                switch(currency){
+                switch(this.chosenCurrency){
                 case 'usd': return '$'
                 case 'eur': return '€'
                 case 'jpy': return '¥'

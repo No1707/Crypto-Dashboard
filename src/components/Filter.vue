@@ -5,17 +5,17 @@
 
         <!-- Market cap. order filter -->
         <div class="inline-block my-2 mr-3 sm:my-4 sm:mr-6 w-52 sm:w-64 z-10">
-            <div class="relative" @click="toggleOrder()">
+            <div class="relative" @click="this.$store.commit('toggleFilters', 'order')">
                 <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
                         <span>{{ orderValue }} ˅</span>
                 </div>
-                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !visibleOrderFilter, visibleOrderFilter }">
+                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !this.$store.state.visibleOrderFilter }">
                     <ul>
                         <li
                             class="p-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 first:rounded-t-lg last:rounded-b-lg"
                             v-for="order in rowsOrder"
                             :class="{ current : order === orderValue }"
-                            @click="selectOrder(order); $emit('rowsOrder', order)"
+                            @click="orderValue=order; $emit('rowsOrder', order)"
                             :key="order"
                         >
                             {{ order }}
@@ -27,17 +27,17 @@
 
         <!-- Rows number filter -->
         <div class="inline-block w-14 sm:w-20 mr-3 sm:mr-6">
-            <div class="relative " @click="toggleRows()">
+            <div class="relative " @click="this.$store.commit('toggleFilters', 'rows')">
                 <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
                         <span>{{ rowsValue }} ˅</span>
                 </div>
-                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !visibleRowsFilter, visibleRowsFilter }">
+                <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !this.$store.state.visibleRowsFilter }">
                     <ul>
                         <li
                             class="p-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 first:rounded-t-lg last:rounded-b-lg"
                             v-for="rows in rowsNbr"
                             :class="{ current : rows === rowsValue }"
-                            @click="selectRows(rows); $emit('rowsNumber', rows)"
+                            @click="rowsValue=rows; $emit('rowsNumber', rows)"
                             :key="rows"
                         >
                             {{ rows }}
@@ -49,6 +49,23 @@
 
     </div>
 </template>
+
+<script>
+    export default {
+        name: "filter-bar",
+        data(){
+            return {
+                textSearch: "",
+
+                rowsNbr: [10, 20, 50, 100, 250],
+                rowsValue: 100,
+
+                rowsOrder: ["Market cap. ascending order", "Market cap. descending order", "Price ascending order", "Price descending order"],
+                orderValue: "Market cap. descending order"
+            }
+        }
+    }
+</script>
 
 <style scoped>
     .top60{
@@ -76,35 +93,3 @@
     }
 </style>
 
-<script>
-    export default {
-        name: "filter-bar",
-        data(){
-            return {
-                textSearch: "",
-
-                rowsNbr: [10, 20, 50, 100, 250],
-                rowsValue: 100,
-                visibleRowsFilter: false,
-
-                rowsOrder: ["Market cap. ascending order", "Market cap. descending order", "Price ascending order", "Price descending order"],
-                orderValue: "Market cap. descending order",
-                visibleOrderFilter: false,
-            }
-        },
-        methods: {
-            toggleRows() {
-                this.visibleRowsFilter = !this.visibleRowsFilter
-            },
-            selectRows(rows) {
-                this.rowsValue = rows
-            },
-            toggleOrder() {
-                this.visibleOrderFilter = !this.visibleOrderFilter
-            },
-            selectOrder(order) {
-                this.orderValue = order
-            }
-		}
-    }
-</script>

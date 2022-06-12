@@ -29,8 +29,7 @@
         },
         computed: {
             currencySign() {
-                const currency = this.chosenCurrency
-                switch(currency){
+                switch(this.chosenCurrency){
                 case 'usd': return '$'
                 case 'eur': return '€'
                 case 'jpy': return '¥'

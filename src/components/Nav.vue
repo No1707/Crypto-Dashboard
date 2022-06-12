@@ -3,17 +3,17 @@
 
       <!-- Currency chooser -->
       <div class="inline-block mx-6 w-18 sm:w-20">
-        <div class="relative" @click="visibleCurrencyFilter = !visibleCurrencyFilter">
+        <div class="relative" @click="this.$store.commit('toggleFilters', 'currency')">
             <div class="text-center label cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-500 p-2">
               <span>{{ currencyValue }} ˅</span>
             </div>
-            <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !visibleCurrencyFilter, visibleCurrencyFilter }">
+            <div class="w-full absolute bg-slate-100 dark:bg-slate-500 rounded-b-lg rounded-t-lg mt-2" :class="{ hidden : !this.$store.state.visibleCurrencyFilter }">
               <ul>
                 <li
-                  class="px-4 py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 first:rounded-t-lg last:rounded-b-lg"
+                  class="py-2 text-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 first:rounded-t-lg last:rounded-b-lg"
                   v-for="currency in currencies"
                   :class="{ current : currency === currencyValue }"
-                  @click="selectCurrency(currency)"
+                  @click="this.$store.commit('changeCurrency', currency)"
                   :key="currency"
                 >
                   {{ currency }}
@@ -50,7 +50,6 @@
         data() {
             return {
                 currencies: ["USD", "EUR", "JPY", "GBP", "CHF", "CAD", "NZD"],
-                visibleCurrencyFilter: false,
                 moonSRC: require(`../assets/moon.svg`),
                 sunSRC: require(`../assets/sun.svg`)
             }
@@ -59,9 +58,6 @@
             this.getDarkMode()
         },
         methods: {
-            selectCurrency(cur) {
-                this.$store.commit('changeCurrency', cur)
-            },
             getDarkMode() {
                 let darkStorage = localStorage.getItem('dark')
                 if(darkStorage === 'true'){
