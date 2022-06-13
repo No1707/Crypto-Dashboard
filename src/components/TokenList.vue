@@ -18,7 +18,7 @@
             </thead>
 
             <tbody v-if="this.allTokens">
-                <Token v-for="(token, index) in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency"></Token>
+                <TokenRow v-for="(token, index) in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency" />
             </tbody>
             
         </table>
@@ -27,13 +27,13 @@
 </template>
 
 <script>
-import Token from './Token.vue'
+import TokenRow from './TokenRow.vue'
 import Filter from './Filter.vue'
 
     export default {
         name: "Token-list",
         components: {
-            Token,
+            TokenRow,
             Filter
         },
         mounted() {

@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/:id',
     name: 'token',
-    component: () => import(/* webpackChunkName: "about" */ '../views/TokenView.vue')
+    component: () => import('../views/TokenView.vue')
   }
 ]
 
