@@ -1,9 +1,10 @@
 <template>
 
+  <!-- wrapper -->
   <div class="dark:bg-slate-800 dark:text-white min-h-screen text-xs md:text-base">
 
     <Navigation />
-
+  
     <router-view />
     
     <!-- footer -->
