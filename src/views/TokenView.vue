@@ -58,6 +58,7 @@ import Chart from '../components/Chart.vue'
 </script>
 
 <style>
+  /** links in desc */
   .tokenDescription a {
     font-weight: bold;
     text-decoration: underline;
