@@ -68,12 +68,6 @@
 </script>
 
 <style scoped>
-    .top60{
-        top: 60px;
-    }
-    .top70{
-        top: 70px;
-    }
     .hidden{
         visibility: hidden;
     }
