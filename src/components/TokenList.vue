@@ -3,8 +3,10 @@
         
         <!-- filtre -->
         <Filter @rowsNumber="rowsNumber" @rowsOrder="rowsOrder" @searchToken="searchToken"/>
-
+        
         <table class="shadow-lg w-full">
+
+            <!-- table head -->
             <thead class="bg-slate-100 dark:bg-slate-700">
                 <tr class="border-b border-slate-200">
                     <th class="py-5 px-2 md:rounded-tl-lg">#</th>
@@ -17,8 +19,9 @@
                 </tr>
             </thead>
 
+            <!-- table rows -->
             <tbody v-if="this.allTokens">
-                <TokenRow v-for="(token, index) in filteredTokens.slice(0, rowsNbr)" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency" />
+                <TokenRow v-for="(token, index) in filteredLoop" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency" />
             </tbody>
             
         </table>
@@ -109,6 +112,9 @@ import Filter from './Filter.vue'
         computed: {
             chosenCurrency() {
                 return this.$store.state.currency.toLowerCase()
+            },
+            filteredLoop() {
+                return this.filteredTokens.slice(0, this.rowsNbr)
             }
         }
     }
