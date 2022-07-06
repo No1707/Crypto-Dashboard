@@ -21,7 +21,7 @@
 
             <!-- table rows -->
             <tbody v-if="this.allTokens">
-                <TokenRow v-for="(token, index) in filteredLoop" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency" />
+                <TokenRow v-for="(token, index) in filteredTokens.slice(0, this.displayedRows)" :key="token.id" :token="token" :index="index" :chosenCurrency="chosenCurrency" />
             </tbody>
             
         </table>
@@ -41,10 +41,12 @@ import Filter from './Filter.vue'
         },
         mounted() {
             this.fetching(this.chosenCurrency)
+            this.infiniteScroll()
             setInterval(() => {this.fetching(this.chosenCurrency)}, 5000)
         },
         data() {
             return{
+                displayedRows: 10,
                 filteredTokens: [],
                 allTokens: [],
                 rowsNbr: 100,
@@ -102,6 +104,13 @@ import Filter from './Filter.vue'
                     token.symbol.toLowerCase().includes(this.search.toLowerCase())
                 )
                 this.rowsOrder(this.order)
+            },
+            infiniteScroll() {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 50 && this.displayedRows < this.rowsNbr) {
+                        this.displayedRows += 10
+                    }
+                })
             }
         },
         watch: {
@@ -112,9 +121,6 @@ import Filter from './Filter.vue'
         computed: {
             chosenCurrency() {
                 return this.$store.state.currency.toLowerCase()
-            },
-            filteredLoop() {
-                return this.filteredTokens.slice(0, this.rowsNbr)
             }
         }
     }
