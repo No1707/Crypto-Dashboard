@@ -71,30 +71,31 @@ import Filter from './Filter.vue'
             },
             rowsNumber(rows){
                 this.rowsNbr = rows
+                if(this.displayedRows > rows) this.displayedRows = rows
             },
             rowsOrder(order){
                 this.order = order
                 switch (order) {
-                    case "Market cap. ascending order":
-                        this.filteredTokens.sort((a, b) => {
-                            return a.market_cap - b.market_cap;
-                        })
-                    break
-                    case "Market cap. descending order":
-                        this.filteredTokens.sort((a, b) => {
-                            return a.market_cap - b.market_cap;
-                        }).reverse()
-                    break
-                    case "Price ascending order":
-                        this.filteredTokens.sort((a, b) => {
-                            return a.current_price - b.current_price;
-                        })
-                    break
-                    case "Price descending order":
-                        this.filteredTokens.sort((a, b) => {
-                            return a.current_price - b.current_price;
-                        }).reverse()
-                    break
+                  case "Market cap. ascending order":
+                      this.filteredTokens.sort((a, b) => {
+                          return a.market_cap - b.market_cap;
+                      })
+                  break
+                  case "Market cap. descending order":
+                      this.filteredTokens.sort((a, b) => {
+                          return a.market_cap - b.market_cap;
+                      }).reverse()
+                  break
+                  case "Price ascending order":
+                      this.filteredTokens.sort((a, b) => {
+                          return a.current_price - b.current_price;
+                      })
+                  break
+                  case "Price descending order":
+                      this.filteredTokens.sort((a, b) => {
+                          return a.current_price - b.current_price;
+                      }).reverse()
+                  break
                 }
             },
             searchToken(val) {

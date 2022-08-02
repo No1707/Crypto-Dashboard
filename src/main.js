@@ -24,8 +24,8 @@ const store = createStore({
         toggleFilters(state, filter){
             if(filter === 'currency'){
                 state.visibleCurrencyFilter = !state.visibleCurrencyFilter
-                state.visibleOrderFilter=false
-                state.visibleRowsFilter=false
+                state.visibleOrderFilter = false
+                state.visibleRowsFilter = false
             } else if(filter === 'order'){
                 state.visibleOrderFilter = !state.visibleOrderFilter
                 state.visibleCurrencyFilter = false
